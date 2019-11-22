@@ -59,15 +59,15 @@
             this.Eliminarbutton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Removerbutton = new System.Windows.Forms.Button();
-            this.MontotextBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.MyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Removerbutton = new System.Windows.Forms.Button();
+            this.MontotextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.MyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IdnumericUpDown)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -133,7 +133,7 @@
             // 
             // FechaSalidadateTimePicker
             // 
-            this.FechaSalidadateTimePicker.CustomFormat = "dd/mm/yyyy";
+            this.FechaSalidadateTimePicker.CustomFormat = "dd/MM/yyyy";
             this.FechaSalidadateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.FechaSalidadateTimePicker.Location = new System.Drawing.Point(386, 43);
             this.FechaSalidadateTimePicker.Name = "FechaSalidadateTimePicker";
@@ -151,7 +151,7 @@
             // 
             // FechaLlegadateTimePicker
             // 
-            this.FechaLlegadateTimePicker.CustomFormat = "dd/mm/yyyy";
+            this.FechaLlegadateTimePicker.CustomFormat = "dd/MM/yyyy";
             this.FechaLlegadateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.FechaLlegadateTimePicker.Location = new System.Drawing.Point(386, 17);
             this.FechaLlegadateTimePicker.Name = "FechaLlegadateTimePicker";
@@ -385,6 +385,36 @@
             this.dataGridView1.Size = new System.Drawing.Size(535, 150);
             this.dataGridView1.TabIndex = 14;
             // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "HabitacionId";
+            this.Column1.HeaderText = "HabitacionId";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "Numero";
+            this.Column2.HeaderText = "Numero";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "Tipo";
+            this.Column3.HeaderText = "Tipo";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "Descripcion";
+            this.Column4.HeaderText = "Descripción";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "Precio";
+            this.Column5.HeaderText = "Precio";
+            this.Column5.Name = "Column5";
+            // 
             // Removerbutton
             // 
             this.Removerbutton.Image = ((System.Drawing.Image)(resources.GetObject("Removerbutton.Image")));
@@ -417,36 +447,6 @@
             // MyErrorProvider
             // 
             this.MyErrorProvider.ContainerControl = this;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "HabitacionId";
-            this.Column1.HeaderText = "HabitacionId";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "Numero";
-            this.Column2.HeaderText = "Numero";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "Tipo";
-            this.Column3.HeaderText = "Tipo";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "Descripcion";
-            this.Column4.HeaderText = "Descripción";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "Precio";
-            this.Column5.HeaderText = "Precio";
-            this.Column5.Name = "Column5";
             // 
             // FReservas
             // 

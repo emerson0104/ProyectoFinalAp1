@@ -1,5 +1,6 @@
 ﻿using Hotel.BLL;
 using Hotel.Entidades;
+using Hotel.UI.Reportes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -147,5 +148,18 @@ namespace Hotel.UI.Consultas
             }
         }
 
+        private void Imprimirbutton_Click(object sender, EventArgs e)
+        {
+            if (ConsultadataGridView.RowCount == 0)
+            {
+                MessageBox.Show("No se puede imprimir");
+                return;
+            }
+            else
+            {
+                ClientesReport r = new ClientesReport(Lista);
+                r.ShowDialog();
+            }
+        }
     }
 }

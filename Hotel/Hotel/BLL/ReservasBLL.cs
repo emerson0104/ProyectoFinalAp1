@@ -18,7 +18,14 @@ namespace Hotel.BLL
             Contexto db = new Contexto();
             try
             {
-               
+                foreach (var item in r.Detalle)
+                {
+                    var habita = db.Habitaciones.Find(item.HabitacionId);
+                    if (item.HabitacionId!=0)
+                    {
+                        habita.Estado = true;
+                    }
+                }
                 if (db.Reservas.Add(r) != null)
                     paso = db.SaveChanges() > 0;
             }
@@ -37,15 +44,36 @@ namespace Hotel.BLL
             bool paso = false;
             Contexto db = new Contexto();
             RepositorioBase<Reservas> Reser = new RepositorioBase<Reservas>();
-       //     RepositorioBase<Productos> prod = new RepositorioBase<Productos>();
+          
+            //     RepositorioBase<Productos> prod = new RepositorioBase<Productos>();
+            /*
+     bool paso = false;
+     Contexto db = new Contexto();
+     RepositorioBase<Reservas> Reser = new RepositorioBase<Reservas>();
+            //     RepositorioBase<Productos> prod = new RepositorioBase<Productos>();
+                 try
+                 {
+                     var Anterior = ReservasBLL.Buscar(reservas.ReservaId);
+                     foreach (var item in Anterior.Detalle)
+                     {
+                         if (!reservas.Detalle.Exists(d => d.Id == item.Id))
+                         {
+                             db.Entry(item).State = EntityState.Deleted;
+                         }
+                     }
+                     */
             try
             {
                 var Anterior = ReservasBLL.Buscar(reservas.ReservaId);
                 foreach (var item in Anterior.Detalle)
                 {
+                   // var habitacion = repositorio.Buscar(item.HabitacionId);
                     if (!reservas.Detalle.Exists(d => d.Id == item.Id))
                     {
-                        db.Entry(item).State = EntityState.Deleted;
+                        
+                            db.Entry(item).State = EntityState.Deleted;
+                        
+                        
                     }
                 }
                 db.Entry(reservas).State = EntityState.Modified;
@@ -64,14 +92,25 @@ namespace Hotel.BLL
 
         public static bool Eliminar(int id)
         {
+            Reservas r =new Reservas();
             bool paso = false;
             Contexto db = new Contexto();
             try
             {
+
+
+                foreach (var item in r.Detalle)
+                {
+                    var habita = db.Habitaciones.Find(item.HabitacionId);
+                    if (item.HabitacionId != 0)
+                    {
+                        habita.Estado = true;
+                    }
+                }
                 var eliminar = db.Reservas.Find(id);
                 db.Entry(eliminar).State = EntityState.Deleted;
-
-                paso = db.SaveChanges() > 0;
+                
+                    paso = db.SaveChanges() > 0;
             }
             catch (Exception)
             {
@@ -127,14 +166,66 @@ namespace Hotel.BLL
             }
             return lista;
         }
-        public static void checkin()
+        public static bool checkins(Reservas r )
         {
-            RepositorioBase<Habitaciones> Reser = new RepositorioBase<Habitaciones>();
-            
+           
             Contexto db = new Contexto();
-            var habita = db.Habitaciones.Find(NumerocomboBox);
-            habita.Estado = false;
-            Reser.Modificar(habita);
+            bool paso = false;
+            try
+            {
+                foreach (var item in r.Detalle)
+                {
+                    var habita = db.Habitaciones.Find(item.HabitacionId);
+                    if (item.HabitacionId != 0)
+                    {
+                        habita.Estado = false;
+                    }
+                    if (db.Reservas.Add(r) != null)
+                        db.Entry(r).State = EntityState.Modified;
+                    paso = db.SaveChanges() > 0;
+                }
+
+
+            }
+            catch (Exception) {
+            }finally
+            {
+                db.Dispose();
+            }
+            return paso;
+        } 
+        public static bool checkout(Reservas r)
+        {
+            Contexto db = new Contexto();
+            bool paso = false;
+            try
+            {
+                foreach (var item in r.Detalle)
+                {
+                    var habita = db.Habitaciones.Find(item.HabitacionId);
+                    if (item.HabitacionId != 0)
+                    {
+                        habita.Estado = true;
+                    }
+                    if(db.Reservas.Add(r) != null)
+                   
+                    db.Entry(r).State = EntityState.Modified;
+                    paso = db.SaveChanges() > 0;
+                
+               
+                    
+                }
+
+
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return paso;
         }
     }
 }

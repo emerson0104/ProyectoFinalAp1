@@ -28,8 +28,9 @@ namespace Hotel.UI.Registros
             DescripciontextBox.Text = string.Empty;
             CamasnumericUpDown.Value = 0;
             PreciotextBox.Text = string.Empty;
+            EstadocomboBox.Text = null;
             EstadocomboBox.Text.Any();
-            EstadocomboBox.Text = "";
+            
         }
         private void LlenaCampo(Habitaciones h)
         {

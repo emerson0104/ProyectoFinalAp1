@@ -15,7 +15,7 @@ namespace Hotel.UI
 {
     public partial class FReservas : Form
     {
-     
+
         public List<ReservasDetalle> Detalle { get; set; }
         public FReservas()
         {
@@ -24,7 +24,7 @@ namespace Hotel.UI
             Detalle = new List<ReservasDetalle>();
             Cliente();
             Habitacion();
-           
+
         }
 
         private void Cliente()
@@ -37,15 +37,14 @@ namespace Hotel.UI
             ClientecomboBox.ValueMember = "ClienteId";
 
         }
-        private decimal fechaAdia(decimal valor)
+               private decimal fechaAdia(DateTime Finicio, DateTime Fsalida,decimal d)
         {
             decimal dia;
-            Reservas r = new Reservas();
-            r.FechaReserva = FechaReservadateTimePicker.Value.Date;
-            r.FechaSalida = FechaSalidadateTimePicker.Value.Date;
-            TimeSpan T = r.FechaSalida-r. FechaReserva ;
-            dia = T.Days;
-            return dia * valor;
+         
+            TimeSpan T =Fsalida - Finicio;
+            dia = (decimal)T.Days;
+            
+            return d *dia;
         }
         private void Habitacion()
         {
@@ -60,16 +59,16 @@ namespace Hotel.UI
         }
         private void CargarGrid()
         {//List<ReservasDetalle>lista
-      //     DetalledataGridView.Rows.Clear();
-           // foreach (var item in lista)
-          //  {
-           //     DetalledataGridView.Rows.Add(item.HabitacionId, item.Numero, item.Tipo, item.Descripcion, item.Precio);
-           // }
+         //     DetalledataGridView.Rows.Clear();
+         // foreach (var item in lista)
+         //  {
+         //     DetalledataGridView.Rows.Add(item.HabitacionId, item.Numero, item.Tipo, item.Descripcion, item.Precio);
+         // }
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = this.Detalle;
 
         }
-        
+
         private void Limpiar()
         {
             IdnumericUpDown.Value = 0;
@@ -105,6 +104,12 @@ namespace Hotel.UI
                 paso = false;
             }
 
+            if (FechaSalidadateTimePicker.Value <= FechaReservadateTimePicker.Value)
+            {
+                MyErrorProvider.SetError(FechaSalidadateTimePicker,"No puede ser igual A Fecha de salida");
+                paso = false;
+            }
+
             if (Detalle.Count == 0)
             {
                 MessageBox.Show("El grid esta vacio.", "Hotel Software", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -112,6 +117,7 @@ namespace Hotel.UI
             }
             return paso;
         }
+       
         private void LlenaCampo(Reservas v)
         {
             IdnumericUpDown.Value = v.ReservaId;
@@ -119,9 +125,9 @@ namespace Hotel.UI
             FechaLlegadateTimePicker.Value = v.FechaLlegada;
             FechaSalidadateTimePicker.Value = v.FechaSalida;
             FechaReservadateTimePicker.Value = v.FechaReserva;
-            MontotextBox.Text =Convert.ToString( v.MontroReserva);
+            MontotextBox.Text = Convert.ToString(v.MontroReserva);
             this.Detalle = v.Detalle;
-            CargarGrid( );
+            CargarGrid();
         }
         private Reservas LlenaClase()
         {
@@ -132,13 +138,14 @@ namespace Hotel.UI
             r.MontroReserva = Convert.ToDecimal(MontotextBox.Text);
             r.FechaLlegada = FechaLlegadateTimePicker.Value;
             r.FechaSalida = FechaSalidadateTimePicker.Value;
-
+            Habitaciones p = NumerocomboBox.SelectedItem as Habitaciones;
+          
             //   r.UsuarioId = id;
 
             r.Detalle = this.Detalle;
             CargarGrid();
             return r;
-          
+
         }
         private void NumericUpDown1_ValueChanged(object sender, EventArgs e)
         {
@@ -168,14 +175,13 @@ namespace Hotel.UI
 
         private void NumerocomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Habitaciones p = NumerocomboBox.SelectedItem as Habitaciones;
+            decimal r;
+             Habitaciones p = NumerocomboBox.SelectedItem as Habitaciones;
             if (p != null)
             {
                 TipotextBox.Text = p.Tipo;
                 DescripciontextBox.Text = p.Descripcion;
-
-                PreciotextBox.Text = fechaAdia(p.Valor).ToString();
-
+                PreciotextBox.Text = Convert.ToString(fechaAdia(FechaLlegadateTimePicker.Value, FechaSalidadateTimePicker.Value, p.Valor));
             }
         }
 
@@ -229,26 +235,27 @@ namespace Hotel.UI
 
         private void Agregarbutton_Click(object sender, EventArgs e)
         {
-            
-                if (NumerocomboBox.SelectedValue != null)
+
+            if (NumerocomboBox.SelectedValue != null)
+            {
+                int d = (int)NumerocomboBox.SelectedValue;
+
+                foreach (var item in Detalle)
                 {
-                    int d = (int)NumerocomboBox.SelectedValue;
-
-                    foreach (var item in Detalle)
+                    if (d == item.HabitacionId)
                     {
-                        if (d == item.HabitacionId)
-                        {
-                            MyErrorProvider.SetError(Agregarbutton, "La habitacion ya esta agregada");
-                            return;
-                        }
+                        MyErrorProvider.SetError(Agregarbutton, "La habitacion ya esta agregada");
+                        return;
                     }
+                }
 
 
-                
+
                 Contexto db = new Contexto();
-                if (dataGridView1.DataSource != null) { 
+                if (dataGridView1.DataSource != null)
+                {
                     this.Detalle = (List<ReservasDetalle>)dataGridView1.DataSource;
-}
+                }
                 /*  this.Detalle.Add(new ReservasDetalle(
 
                       reservaId :0,
@@ -279,15 +286,32 @@ namespace Hotel.UI
                 TipotextBox.Text = null;
 
                 CargarGrid();
+                CalcularTotal();
             }
         }
+        public void CalcularTotal()
+        {
+            decimal total = 0;
+            foreach (var item in Detalle)
+            {
+                total += item.Precio;
+            }
+            MontotextBox.Text = total.ToString();
+        }
 
+        public void precio(
+            decimal d)
+        {
+     
+           
+        }
         private void Removerbutton_Click(object sender, EventArgs e)
         {
             if (dataGridView1.Rows.Count > 0 && dataGridView1.CurrentRow != null)
             {
                 Detalle.RemoveAt(dataGridView1.CurrentRow.Index);
                 CargarGrid();
+                CalcularTotal();
             }
         }
 
@@ -308,28 +332,31 @@ namespace Hotel.UI
 
         private void Checkinbutton_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Habitaciones> Reser = new RepositorioBase<Habitaciones>();
-
-            Contexto db = new Contexto();
-            if (FechaReservadateTimePicker.Value != FechaSalidadateTimePicker.Value) {
-                var habita = db.Habitaciones.Find(NumerocomboBox.SelectedValue);
-                habita.Estado = false;
-                Reser.Modificar(habita);
-            }
+            Reservas r = new Reservas();
+            bool paso; if (!ExisteEnLaBaseDeDatos())
+                paso = false;
+            paso =ReservasBLL.checkins(r);
+            if (paso)
+                MessageBox.Show("Habitacion Reservas", "Hotel Software", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-            {
-                MessageBox.Show("No Tiene Fecha de ");
-            }
+                MessageBox.Show("No se reservo esta ocupada", "Hotel Software", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+          
+
         }
+
 
         private void Checkoutbutton_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Habitaciones> Reser = new RepositorioBase<Habitaciones>();
-
-            Contexto db = new Contexto();
-            var habita = db.Habitaciones.Find(NumerocomboBox.SelectedValue);
-            habita.Estado = true;
-            Reser.Modificar(habita);
+            Reservas r = new Reservas();
+            bool paso;
+            paso = false;
+            
+            paso = ReservasBLL.checkout(r);
+            if (paso)
+                MessageBox.Show("Habitacion Reservas", "Hotel Software", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("No se reservo esta ocupada", "Hotel Software", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
