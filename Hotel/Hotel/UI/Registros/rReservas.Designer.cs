@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FReservas));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labe = new System.Windows.Forms.Label();
+            this.UsuarioTextBox = new System.Windows.Forms.TextBox();
             this.Checkoutbutton = new System.Windows.Forms.Button();
             this.Checkinbutton = new System.Windows.Forms.Button();
             this.ClientecomboBox = new System.Windows.Forms.ComboBox();
@@ -79,6 +81,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox1.Controls.Add(this.labe);
+            this.groupBox1.Controls.Add(this.UsuarioTextBox);
             this.groupBox1.Controls.Add(this.Checkoutbutton);
             this.groupBox1.Controls.Add(this.Checkinbutton);
             this.groupBox1.Controls.Add(this.ClientecomboBox);
@@ -97,6 +101,24 @@
             this.groupBox1.Size = new System.Drawing.Size(786, 164);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Enter += new System.EventHandler(this.GroupBox1_Enter);
+            // 
+            // labe
+            // 
+            this.labe.AutoSize = true;
+            this.labe.Location = new System.Drawing.Point(634, 23);
+            this.labe.Name = "labe";
+            this.labe.Size = new System.Drawing.Size(43, 13);
+            this.labe.TabIndex = 25;
+            this.labe.Text = "Usuario";
+            // 
+            // UsuarioTextBox
+            // 
+            this.UsuarioTextBox.Location = new System.Drawing.Point(678, 20);
+            this.UsuarioTextBox.Name = "UsuarioTextBox";
+            this.UsuarioTextBox.ReadOnly = true;
+            this.UsuarioTextBox.Size = new System.Drawing.Size(79, 20);
+            this.UsuarioTextBox.TabIndex = 24;
             // 
             // Checkoutbutton
             // 
@@ -253,6 +275,7 @@
             // 
             this.DescripciontextBox.Location = new System.Drawing.Point(386, 30);
             this.DescripciontextBox.Name = "DescripciontextBox";
+            this.DescripciontextBox.ReadOnly = true;
             this.DescripciontextBox.Size = new System.Drawing.Size(137, 20);
             this.DescripciontextBox.TabIndex = 20;
             // 
@@ -280,6 +303,7 @@
             // 
             this.TipotextBox.Location = new System.Drawing.Point(220, 32);
             this.TipotextBox.Name = "TipotextBox";
+            this.TipotextBox.ReadOnly = true;
             this.TipotextBox.Size = new System.Drawing.Size(79, 20);
             this.TipotextBox.TabIndex = 15;
             this.TipotextBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
@@ -431,6 +455,7 @@
             // 
             this.MontotextBox.Location = new System.Drawing.Point(694, 193);
             this.MontotextBox.Name = "MontotextBox";
+            this.MontotextBox.ReadOnly = true;
             this.MontotextBox.Size = new System.Drawing.Size(76, 20);
             this.MontotextBox.TabIndex = 12;
             // 
@@ -514,5 +539,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.Label labe;
+        private System.Windows.Forms.TextBox UsuarioTextBox;
     }
 }

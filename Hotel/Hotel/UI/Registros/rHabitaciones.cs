@@ -15,8 +15,10 @@ namespace Hotel.UI.Registros
 {
     public partial class rHabitaciones : Form
     {
-        public rHabitaciones()
+        private int id;
+        public rHabitaciones(int id)
         {
+            this.id = id;
             InitializeComponent();
         }
         private void Limpiar()
@@ -28,8 +30,8 @@ namespace Hotel.UI.Registros
             DescripciontextBox.Text = string.Empty;
             CamasnumericUpDown.Value = 0;
             PreciotextBox.Text = string.Empty;
-            EstadocomboBox.Text = null;
-            EstadocomboBox.Text.Any();
+            EstadocomboBox.Text =string.Empty;
+           
             
         }
         private void LlenaCampo(Habitaciones h)
@@ -40,7 +42,7 @@ namespace Hotel.UI.Registros
             DescripciontextBox.Text = h.Descripcion;
             CamasnumericUpDown.Value = h.Camas;
             PreciotextBox.Text = Convert.ToString(h.Valor);
-            EstadocomboBox.SelectedIndex= Convert.ToInt32(h.Estado);
+            EstadocomboBox.Text=h.Estado;
         }
         private bool ExisteEnLaBaseDeDatos()
         {
@@ -57,8 +59,8 @@ namespace Hotel.UI.Registros
             c.Descripcion = DescripciontextBox.Text;
             c.Camas = Convert.ToInt32(CamasnumericUpDown.Value);
             c.Valor =Convert.ToDecimal( PreciotextBox.Text);
-            c.Estado =Convert.ToBoolean( EstadocomboBox.SelectedIndex);
-          
+            c.Estado = EstadocomboBox.Text;
+           c.UsuarioId = id;
 
             return c;
 

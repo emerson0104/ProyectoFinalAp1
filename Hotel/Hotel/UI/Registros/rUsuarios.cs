@@ -31,6 +31,8 @@ namespace Hotel.UI.Registros
             EmailtextBox.Text = string.Empty;
             CelularmaskedTextBox1.Text = string.Empty;
             FechaCreaciondateTimePicker.Value = DateTime.Now;
+            TiposcomboBox.Text = string.Empty;
+            TotalVendidotextBox.Text = string.Empty;
             MyErrorProvider.Clear();
 
         }
@@ -43,6 +45,8 @@ namespace Hotel.UI.Registros
             usuarios.Apellidos=ApellidostextBox.Text;
             usuarios.Usuario = NombreUsuariotextBox.Text;
             usuarios.Clave = ClavetextBox.Text;
+            usuarios.NivelAcceso = TiposcomboBox.Text;
+            usuarios.TotalVentas = Convert.ToDecimal(TotalVendidotextBox.Text);
             usuarios.Email= EmailtextBox.Text;
             usuarios.FechaCreacion = FechaCreaciondateTimePicker.Value;
             usuarios.Celular= CelularmaskedTextBox1.Text;
@@ -57,7 +61,8 @@ namespace Hotel.UI.Registros
             NombrestextBox.Text = usuarios.Nombres;
             ApellidostextBox.Text = usuarios.Apellidos;
             NombreUsuariotextBox.Text = usuarios.Usuario;
-
+            TiposcomboBox.Text = usuarios.NivelAcceso;
+            TotalVendidotextBox.Text = Convert.ToString(usuarios.TotalVentas);
             ClavetextBox.Text = usuarios.Clave;
             ConfirmartextBox.Text = usuarios.Clave;
             EmailtextBox.Text = usuarios.Email;

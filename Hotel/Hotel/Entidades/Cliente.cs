@@ -19,7 +19,7 @@ namespace Hotel.Entidades
         public string Direccion { get; set; }
         [Browsable(false)]
         public int UsuarioId { get; set; }
-        
+        [Browsable(false)]
         public Cliente()
         {
             ClienteId = 0;

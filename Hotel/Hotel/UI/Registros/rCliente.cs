@@ -15,10 +15,10 @@ namespace Hotel.UI.Registros
 {
     public partial class rCliente : Form
     {
-       
-        public rCliente()
+        private int id;
+        public rCliente(int id)
         {
-         
+            this.id = id;
             InitializeComponent();
         }
         private void Limpiar()
@@ -49,7 +49,7 @@ namespace Hotel.UI.Registros
             c.Apellidos = ApellidostextBox.Text;
             c.Direccion = DirecciontextBox.Text;
             c.Email = EmailtextBox.Text;
-         
+            c.UsuarioId = id;
             return c;
         }
         private bool ExisteEnLaBaseDeDatos()

@@ -32,5 +32,6 @@ namespace Hotel.Entidades
             UsuarioId = 0;
             Detalle = new List<ReservasDetalle>();
         }
+       
     }
 }

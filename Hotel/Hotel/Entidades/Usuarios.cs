@@ -15,11 +15,13 @@ namespace Hotel.Entidades
         public string Usuario { get; set; }
         [Browsable(false)]
         public string Clave { get; set; }
+        public string NivelAcceso { get; set; }
         public string Celular { get; set; }
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string Email { get; set; }
         public DateTime FechaCreacion { get; set; }
+        public decimal TotalVentas { get; set; }
 
         public Usuarios()
         {
@@ -30,6 +32,8 @@ namespace Hotel.Entidades
             Apellidos = string.Empty;
             Email = string.Empty;
             FechaCreacion = DateTime.Now;
+            NivelAcceso = string.Empty;
+            TotalVentas = 0;
         }
     }
 }

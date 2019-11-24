@@ -59,10 +59,11 @@ namespace Hotel.UI.Consultas
                             listado = r.GetList(p => p.Tipo.Contains(CriteriotextBox.Text));
                             break;
                         case "Estado":
-                            bool d = Convert.ToBoolean(CriteriotextBox.Text);
-                            listado = r.GetList(p => p.Estado == d);
-                            
+
+                            listado = r.GetList(p => p.Estado.Contains(CriteriotextBox.Text));
                             break;
+
+                           
                         case "Camas":
                             int pe;
                             if (!int.TryParse(CriteriotextBox.Text, out pe))
@@ -132,8 +133,7 @@ namespace Hotel.UI.Consultas
                             listado = r.GetList(p => p.Tipo.Contains(CriteriotextBox.Text));
                             break;
                         case "Estado":
-                            bool d = Convert.ToBoolean(CriteriotextBox.Text);
-                            listado = r.GetList(p => p.Estado == d);
+                           listado = r.GetList(p => p.Estado.Contains(CriteriotextBox.Text));
                             break;
                         case "Camas":
                             int pe;

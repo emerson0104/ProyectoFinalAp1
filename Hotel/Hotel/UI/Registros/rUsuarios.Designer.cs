@@ -31,6 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(rUsuarios));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.EmailtextBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.FechaCreaciondateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.ConfirmartextBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.Buscarbutton = new System.Windows.Forms.Button();
             this.CelularmaskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.ApellidostextBox = new System.Windows.Forms.TextBox();
@@ -49,12 +55,10 @@
             this.Guardarbutton = new System.Windows.Forms.Button();
             this.Nuevobutton = new System.Windows.Forms.Button();
             this.MyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.ConfirmartextBox = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.FechaCreaciondateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.EmailtextBox = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.TotalVendidotextBox = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.TiposcomboBox = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IdnumericUpDown)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -63,6 +67,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.TiposcomboBox);
+            this.groupBox1.Controls.Add(this.TotalVendidotextBox);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.EmailtextBox);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label5);
@@ -84,10 +92,59 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(4, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(353, 324);
+            this.groupBox1.Size = new System.Drawing.Size(353, 361);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.GroupBox1_Enter);
+            // 
+            // EmailtextBox
+            // 
+            this.EmailtextBox.Location = new System.Drawing.Point(101, 241);
+            this.EmailtextBox.Name = "EmailtextBox";
+            this.EmailtextBox.Size = new System.Drawing.Size(197, 20);
+            this.EmailtextBox.TabIndex = 22;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(32, 241);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(32, 13);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Email";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 342);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Fecha Creacion";
+            // 
+            // FechaCreaciondateTimePicker
+            // 
+            this.FechaCreaciondateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.FechaCreaciondateTimePicker.Location = new System.Drawing.Point(101, 335);
+            this.FechaCreaciondateTimePicker.Name = "FechaCreaciondateTimePicker";
+            this.FechaCreaciondateTimePicker.Size = new System.Drawing.Size(197, 20);
+            this.FechaCreaciondateTimePicker.TabIndex = 19;
+            // 
+            // ConfirmartextBox
+            // 
+            this.ConfirmartextBox.Location = new System.Drawing.Point(101, 210);
+            this.ConfirmartextBox.Name = "ConfirmartextBox";
+            this.ConfirmartextBox.Size = new System.Drawing.Size(197, 20);
+            this.ConfirmartextBox.TabIndex = 18;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(32, 210);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(51, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Confirmar";
             // 
             // Buscarbutton
             // 
@@ -205,7 +262,7 @@
             this.groupBox2.Controls.Add(this.Eliminarbutton);
             this.groupBox2.Controls.Add(this.Guardarbutton);
             this.groupBox2.Controls.Add(this.Nuevobutton);
-            this.groupBox2.Location = new System.Drawing.Point(4, 322);
+            this.groupBox2.Location = new System.Drawing.Point(4, 361);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(353, 65);
             this.groupBox2.TabIndex = 29;
@@ -254,60 +311,49 @@
             // 
             this.MyErrorProvider.ContainerControl = this;
             // 
-            // ConfirmartextBox
+            // TotalVendidotextBox
             // 
-            this.ConfirmartextBox.Location = new System.Drawing.Point(101, 210);
-            this.ConfirmartextBox.Name = "ConfirmartextBox";
-            this.ConfirmartextBox.Size = new System.Drawing.Size(197, 20);
-            this.ConfirmartextBox.TabIndex = 18;
+            this.TotalVendidotextBox.Location = new System.Drawing.Point(101, 309);
+            this.TotalVendidotextBox.Name = "TotalVendidotextBox";
+            this.TotalVendidotextBox.ReadOnly = true;
+            this.TotalVendidotextBox.Size = new System.Drawing.Size(197, 20);
+            this.TotalVendidotextBox.TabIndex = 24;
             // 
-            // label9
+            // label10
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(32, 210);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(51, 13);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "Confirmar";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(17, 312);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(73, 13);
+            this.label10.TabIndex = 23;
+            this.label10.Text = "Total Vendido";
             // 
-            // FechaCreaciondateTimePicker
+            // TiposcomboBox
             // 
-            this.FechaCreaciondateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.FechaCreaciondateTimePicker.Location = new System.Drawing.Point(101, 267);
-            this.FechaCreaciondateTimePicker.Name = "FechaCreaciondateTimePicker";
-            this.FechaCreaciondateTimePicker.Size = new System.Drawing.Size(197, 20);
-            this.FechaCreaciondateTimePicker.TabIndex = 19;
+            this.TiposcomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TiposcomboBox.FormattingEnabled = true;
+            this.TiposcomboBox.Items.AddRange(new object[] {
+            "Usuario",
+            "Administrador"});
+            this.TiposcomboBox.Location = new System.Drawing.Point(101, 277);
+            this.TiposcomboBox.Name = "TiposcomboBox";
+            this.TiposcomboBox.Size = new System.Drawing.Size(197, 21);
+            this.TiposcomboBox.TabIndex = 26;
             // 
-            // label5
+            // label11
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 273);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 13);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "Fecha Creacion";
-            // 
-            // EmailtextBox
-            // 
-            this.EmailtextBox.Location = new System.Drawing.Point(101, 241);
-            this.EmailtextBox.Name = "EmailtextBox";
-            this.EmailtextBox.Size = new System.Drawing.Size(197, 20);
-            this.EmailtextBox.TabIndex = 22;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(32, 241);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(32, 13);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "Email";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(29, 285);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(28, 13);
+            this.label11.TabIndex = 27;
+            this.label11.Text = "Tipo";
             // 
             // rUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 389);
+            this.ClientSize = new System.Drawing.Size(369, 438);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "rUsuarios";
@@ -348,5 +394,9 @@
         private System.Windows.Forms.DateTimePicker FechaCreaciondateTimePicker;
         private System.Windows.Forms.TextBox EmailtextBox;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox TiposcomboBox;
+        private System.Windows.Forms.TextBox TotalVendidotextBox;
+        private System.Windows.Forms.Label label10;
     }
 }

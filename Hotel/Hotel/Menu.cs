@@ -17,15 +17,15 @@ namespace Hotel
     public partial class FMenu : Form
     {
         public int id { get; set; }
-        public FMenu()
+        public FMenu(int id)
         {
-            
+            this.id = id;
             InitializeComponent();
         }
 
         private void ReservacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FReservas r = new FReservas();
+            FReservas r = new FReservas(id);
             r.Show();
         }
 
@@ -37,13 +37,13 @@ namespace Hotel
 
         private void HabitacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            rHabitaciones h = new rHabitaciones();
+            rHabitaciones h = new rHabitaciones(id);
             h.Show();
         }
 
         private void ClienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            rCliente rCliente = new rCliente();
+            rCliente rCliente = new rCliente(id);
             rCliente.Show();
 
         }

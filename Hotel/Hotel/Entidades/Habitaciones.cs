@@ -12,12 +12,16 @@ namespace Hotel.Entidades
     {
         [Key]
         public int HabitacionId { get; set; }
+        [Browsable(false)]
         public string Numero { get; set; }
         public string Tipo { get; set; }
         public string Descripcion { get; set; }
-        public decimal Valor { get; set; }
-        public bool Estado { get; set; }
         public int Camas { get; set; }
+        [Browsable(false)]
+        public decimal Valor { get; set; }
+        [Browsable(false)]
+        public string Estado { get; set; }
+       
         [Browsable(false)]
         public int UsuarioId { get; set; }
         public Habitaciones()
@@ -27,7 +31,7 @@ namespace Hotel.Entidades
             Tipo = string.Empty;
             Descripcion = string.Empty;
             Valor = 0;
-            Estado = false;
+            Estado = string.Empty; 
             Camas = 0;
             UsuarioId = 0;
         }

@@ -17,14 +17,17 @@ namespace Hotel.UI
     {
 
         public List<ReservasDetalle> Detalle { get; set; }
-        public FReservas()
+        private int id;
+        public FReservas(int id)
         {
+            this.id = id;
 
             InitializeComponent();
-            Detalle = new List<ReservasDetalle>();
+         
             Cliente();
             Habitacion();
-
+            Detalle = new List<ReservasDetalle>();
+            CargarUsuario();
         }
 
         private void Cliente()
@@ -37,14 +40,19 @@ namespace Hotel.UI
             ClientecomboBox.ValueMember = "ClienteId";
 
         }
-               private decimal fechaAdia(DateTime Finicio, DateTime Fsalida,decimal d)
+               private decimal fechaAdia(decimal v)
         {
+
             decimal dia;
-         
-            TimeSpan T =Fsalida - Finicio;
-            dia = (decimal)T.Days;
+            Reservas r = new Reservas();
+             FechaReservadateTimePicker.Value= r.FechaReserva;
+              FechaSalidadateTimePicker.Value=r.FechaSalida;
+            TimeSpan T = r.FechaSalida - r.FechaReserva;
+            dia = T.Days;
+            return dia * v;
+
+           
             
-            return d *dia;
         }
         private void Habitacion()
         {
@@ -132,13 +140,17 @@ namespace Hotel.UI
         private Reservas LlenaClase()
         {
             Reservas r = new Reservas();
+            ReservasDetalle rd = new ReservasDetalle();
             r.Detalle = this.Detalle;
             r.ReservaId = Convert.ToInt32(IdnumericUpDown.Value);
             r.FechaReserva = FechaReservadateTimePicker.Value;
             r.MontroReserva = Convert.ToDecimal(MontotextBox.Text);
             r.FechaLlegada = FechaLlegadateTimePicker.Value;
             r.FechaSalida = FechaSalidadateTimePicker.Value;
-            Habitaciones p = NumerocomboBox.SelectedItem as Habitaciones;
+            r.UsuarioId = id;
+            precio();
+         
+            Habitaciones d = NumerocomboBox.SelectedItem as Habitaciones;
           
             //   r.UsuarioId = id;
 
@@ -175,13 +187,14 @@ namespace Hotel.UI
 
         private void NumerocomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            decimal r;
+            
              Habitaciones p = NumerocomboBox.SelectedItem as Habitaciones;
             if (p != null)
             {
                 TipotextBox.Text = p.Tipo;
                 DescripciontextBox.Text = p.Descripcion;
-                PreciotextBox.Text = Convert.ToString(fechaAdia(FechaLlegadateTimePicker.Value, FechaSalidadateTimePicker.Value, p.Valor));
+                
+                precio();
             }
         }
 
@@ -284,7 +297,7 @@ namespace Hotel.UI
                 NumerocomboBox.Text = null;
                 PreciotextBox.Text = null;
                 TipotextBox.Text = null;
-
+                
                 CargarGrid();
                 CalcularTotal();
             }
@@ -299,11 +312,14 @@ namespace Hotel.UI
             MontotextBox.Text = total.ToString();
         }
 
-        public void precio(
-            decimal d)
+        public void precio( 
+            )
         {
-     
-           
+            Habitaciones p = NumerocomboBox.SelectedItem as Habitaciones;
+            decimal pr = 0;
+            pr = fechaAdia(p.Valor);
+            PreciotextBox.Text =pr.ToString();
+
         }
         private void Removerbutton_Click(object sender, EventArgs e)
         {
@@ -335,7 +351,7 @@ namespace Hotel.UI
             Reservas r = new Reservas();
             bool paso; if (!ExisteEnLaBaseDeDatos())
                 paso = false;
-            paso =ReservasBLL.checkins(r);
+            paso =ReservasBLL.checkins();
             if (paso)
                 MessageBox.Show("Habitacion Reservas", "Hotel Software", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
@@ -344,19 +360,33 @@ namespace Hotel.UI
           
 
         }
-
+        private void CargarUsuario()
+        {
+            RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
+            UsuarioTextBox.DataBindings.Clear();
+            var Usuario = repositorio.GetList(c => true);
+            Binding doBinding = new Binding("Text", Usuario, "Nombre");
+            UsuarioTextBox.DataBindings.Add(doBinding);
+        }
 
         private void Checkoutbutton_Click(object sender, EventArgs e)
         {
-            Reservas r = new Reservas();
-            bool paso;
-            paso = false;
-            
-            paso = ReservasBLL.checkout(r);
-            if (paso)
-                MessageBox.Show("Habitacion Reservas", "Hotel Software", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            int id;
+            int.TryParse(IdnumericUpDown.Text, out id);
+
+            Limpiar();
+
+            if (ReservasBLL.checkout(id))
+                MessageBox.Show("Habitacion disponible");
             else
-                MessageBox.Show("No se reservo esta ocupada", "Hotel Software", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MyErrorProvider.SetError(IdnumericUpDown, "No existe.");
+        }
+       
+        
+
+        private void GroupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
